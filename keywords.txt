@@ -1,4 +1,11 @@
+clsx
 commitlint
+craco
 linebreak
+nofollow
+noopener
+noreferrer
 Parens
+reduxjs
 tailwindcss
+unindex

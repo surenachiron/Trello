@@ -52,20 +52,19 @@ export const listsSlice = createSlice({
     moveCard: (
       state,
       action: PayloadAction<{
-        oldIndex: number;
-        newIndex: number;
-        listIndex: number;
+        oldListIndex: number;
+        newListIndex: number;
+        oldCardIndex: number;
+        newCardIndex: number;
       }>,
     ) => {
-      const list = state.find((list) => list.id === action.payload.listIndex);
-      const { oldIndex, newIndex } = action.payload;
-      if (list) {
-        const cards = list.cards;
-
-        if (cards && oldIndex >= 0 && newIndex >= 0) {
-          const [movedCard] = cards.splice(oldIndex, 1);
-          cards.splice(newIndex, 0, movedCard);
-        }
+      const { oldListIndex, newListIndex, oldCardIndex, newCardIndex } =
+        action.payload;
+      const oldList = state.find((list) => list.id === oldListIndex);
+      const newList = state.find((list) => list.id === newListIndex);
+      if (oldList && newList) {
+        const movedCard = oldList.cards.splice(oldCardIndex, 1)[0];
+        newList.cards.splice(newCardIndex, 0, movedCard);
       }
     },
   },

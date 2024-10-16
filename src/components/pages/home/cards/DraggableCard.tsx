@@ -1,11 +1,11 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { DragOverlay } from "@dnd-kit/core";
 
 import { CardContext, CardTitle } from "@/components/ui/Card";
 import { useAppDispatch } from "@/hooks/Redux";
 import { deleteCard } from "@/store/reducers/lists";
 import { CardType } from "models/list";
-import { DragOverlay } from "@dnd-kit/core";
 
 const DraggableCard = ({
   card,
@@ -27,12 +27,13 @@ const DraggableCard = ({
     isDragging,
   } = useSortable({
     id: card.id,
+    data: { type: "card", listId: listIndex },
   });
 
   const cardStyle = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : 1,
+    opacity: isDragging ? 0 : 1,
   };
 
   return (
@@ -58,7 +59,6 @@ const DraggableCard = ({
       {isDragging ? (
         <DragOverlay>
           <CardContext
-            style={cardStyle}
             className={`p-3 w-full ${isListDragging && "bg-transparent"}`}
           >
             <CardTitle close className="w-full cursor-grab">

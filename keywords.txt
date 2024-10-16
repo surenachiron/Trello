@@ -1,6 +1,7 @@
 clsx
 commitlint
 craco
+hookform
 linebreak
 nofollow
 noopener
